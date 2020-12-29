@@ -265,7 +265,7 @@ static int copy_coll(void)
     /* Set up the ccsrc collection. */
     ONMREQ("MKCOL", csrc, ne_mkcol(i_session, csrc));
     for (n = 0; n < 10; n++) {
-	sprintf(res, "ccsrc/foo.%d", n);
+	sprintf(res, "ccsrc/foo%d.txt", n);
 	CALL(upload_foo(res));
     }
     ONMREQ("MKCOL", subsrc, ne_mkcol(i_session, subsrc));
@@ -330,7 +330,7 @@ static int copy_coll(void)
     /* Now delete things out of the destination collection to check if
      * they are there. */
     for (n = 0; n < 10; n++) {
-	sprintf(res, "%s%s.%d", i_path, "ccdest/foo", n);
+	sprintf(res, "%s%s%d.txt", i_path, "ccdest/foo", n);
 	ONV(ne_delete(i_session, res),
 	    ("COPY destination coll missing %s? %s", res,
 	     ne_get_error(i_session)));
@@ -457,7 +457,7 @@ static int move_coll(void)
     /* Set up the mvsrc collection. */
     ONMREQ("MKCOL", msrc, ne_mkcol(i_session, msrc));
     for (n = 0; n < 10; n++) {
-	sprintf(res, "mvsrc/foo.%d", n);
+	sprintf(res, "mvsrc/foo%d.txt", n);
 	CALL(upload_foo(res));
     }
     CALL(upload_foo("mvnoncoll"));
@@ -535,7 +535,7 @@ static int move_coll(void)
      * they are there. */
 	
     for (n = 0; n < 10; n++) {
-	sprintf(res, "%s%s.%d", i_path, "mvdest/foo", n);
+	sprintf(res, "%s%s%d.txt", i_path, "mvdest/foo", n);
 	ONV(ne_delete(i_session, res),
 	    ("DELETE from copied collection failed for `%s': %s",
 	     res, SERR));
